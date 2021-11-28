@@ -45,6 +45,7 @@
             text += `</table>`;    
               document.getElementById("productList").innerHTML=text;
            }
+
            function fileUpload(){
                let a = new Array();
                let author = document.getElementById("author").value;
@@ -56,10 +57,48 @@
                data.push(a);
                console.log(data);
            }
+
+            function popup(){
+                //window.open("팝업소스파일", "별명", "스타일설정")
+                window.open("event.html", "Event 동아사진전", "width=800, height=700, scrollbars=yes");
+            }
+
+            function funAppend(){
+            const list = document.createElement("li");
+            const work = document.getElementById("text").value;
+            const node = document.createTextNode(work);
+            list.appendChild(node);
+            const ele = document.getElementById("ol1");
+            ele.appendChild(list);
+            }
+
+            function cartAppend(e){
+            const x = document.getElementById(e);
+            const ele = document.getElementById("cart");
+            ele.appendChild(x);
+            }
+
+            function cartRemove(e){
+            const x = document.getElementById(e);
+            const cart = document.getElementById("cart");
+            const photo = document.getElementById("photo");
+            const poetries = document.getElementById("poetries");
+            cart.removeChild(x);
+            list.appendChild(x);
+            }
+
     </script>
+    <style>
+        #cart, #list{
+            display : flex;
+        }
+        #img1, #img2, #img3{
+            flex : 2;
+        }
+    </style>
 </head>
 
-<body>
+<body onload="popup();">
     <header onload="tablePrint();">
         <!-- Sidebar -->
         <div class="w3-sidebar w3-bar-block" style="display: none" id="mySidebar">
@@ -86,10 +125,10 @@
         <article>
             <table id="photo" class="w3-table-all w3-hoverable">
             <h2>개인 사진 전시회</h2>
-            <img class="w3-col s4 w3-border w3-margin" src="./pages/img/Bike.jpg" alt="자전거">
-            <img class="w3-col s4 w3-border w3-margin" src="./pages/img/Pink_muhly.jpg" alt="핑크뮬리">
-            <img class="w3-col s4 w3-border w3-margin" src="./pages/img/forest.jpg" alt="은행나무숲">
-            <img class="w3-col s4 w3-border w3-margin" src="./pages/img/taipei.jpg" alt="횡단보도">    
+            <img id="photo1" class="w3-col s4 w3-border w3-margin" src="./pages/img/Bike.jpg" alt="자전거">
+            <img id="photo2" class="w3-col s4 w3-border w3-margin" src="./pages/img/Pink_muhly.jpg" alt="핑크뮬리">
+            <img id="photo3" class="w3-col s4 w3-border w3-margin" src="./pages/img/forest.jpg" alt="은행나무숲">
+            <img id="photo4" class="w3-col s4 w3-border w3-margin" src="./pages/img/taipei.jpg" alt="횡단보도">   
                 <tr class="w3-indigo">
                     <th>작가</th>
                     <th>사진</th>
@@ -98,29 +137,53 @@
                 <tr>
                     <td>천대원</td>
                     <td>자전거</td>
-                    <td>2,000￦</td>
+                    <td>
+                        <div>
+                            2,000￦
+                            <button onclick="cartAppend('photo1');">추가</button>
+                            <button onclick="cartRemove('photo1');">삭제</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>천대원</td>
                     <td>핑크뮬리</td>
-                    <td>1,500￦</td>
+                    <td>
+                        <div>
+                            1,500￦
+                            <button onclick="cartAppend('photo2');">추가</button>
+                            <button onclick="cartRemove('photo2');">삭제</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>천대원</td>
                     <td>은행나무 숲</td>
-                    <td>1,500￦</td>
+                    <td>
+                        <div>
+                            1,500￦
+                            <button onclick="cartAppend('photo3');">추가</button>
+                            <button onclick="cartRemove('photo3');">삭제</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>천대원</td>
                     <td>대만의 횡단보도</td>
-                    <td>3,000￦</td>
+                    <td>
+                        <div>
+                            3,000￦
+                            <button onclick="cartAppend('photo4');">추가</button>
+                            <button onclick="cartRemove('photo4');">삭제</button>
+                        </div>
+                    </td>
                 </tr>
             </table>
             <h2 id="poetries">개인 시집 전시회</h2>
             <table class="w3-table-all w3-hoverable">
-            <img class="w3-col s3 w3-border w3-margin" src="./myprofile/숨바꼭질.png" alt="숨바꼭질">
-            <img class="w3-col s3 w3-border w3-margin" src="./myprofile/여행.png" alt="여행">
-            <img class="w3-col s3 w3-border w3-margin" src="./myprofile/치즈케이크.png" alt="치즈케이크">
+            <img id="poetries1" class="w3-col s3 w3-border w3-margin" src="./myprofile/숨바꼭질.png" alt="숨바꼭질">
+            <img id="poetries2" class="w3-col s3 w3-border w3-margin" src="./myprofile/여행.png" alt="여행">
+            <img id="poetries3" class="w3-col s3 w3-border w3-margin" src="./myprofile/치즈케이크.png" alt="치즈케이크">
                 <tr class="w3-indigo">
                     <td>작가</td>
                     <td>시</td>
@@ -129,19 +192,41 @@
                 <tr>
                     <td>천대원</td>
                     <td>숨바꼭질</td>
-                    <td>1,000￦</td>
+                    <td>
+                        <div>
+                            1,000￦
+                            <button onclick="cartAppend('poetries1');">추가</button>
+                            <button onclick="cartRemove('poetries1');">삭제</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>천대원</td>
                     <td>여행</td>
-                    <td>1,000￦</td>
+                    <td>
+                        <div>
+                            1,000￦
+                            <button onclick="cartAppend('poetries2');">추가</button>
+                            <button onclick="cartRemove('poetries2');">삭제</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>천대원</td>
                     <td>치즈케이크</td>
-                    <td>1,000￦</td>
+                    <td>
+                        <div>
+                            1,000￦
+                            <button onclick="cartAppend('poetries3');">추가</button>
+                            <button onclick="cartRemove('poetries3');">삭제</button>
+                        </div>
+                    </td>
                 </tr>
             </table>
+            <h2> 장바구니 </h2>
+            <div id="cart" style="width: 800px; height: 250px; border: 1px solid gray;">
+
+            </div>
             <div id="demo" class="w3-container">
             <h2 class="w3-center"> 등록현황 </h2>
             <div id="productList">
@@ -181,6 +266,7 @@
             <input type="password" name="" id="pw"><br>
             <button onclick="login();">로그인</button><button onclick="cancel();">취소</button>
         </div>
+        <br><br><br>
         <div id="profile">
         <h3>작가 소개</h3>
         <img withd="250" height="250" src="./myprofile/프로필1.jpg" alt="Profile">
@@ -199,6 +285,20 @@
             <h4>학교 사이트 바로가기</h4>
             <a href="https://www.donga.ac.kr/" style="margin: 20px;" >동아대학교</a>
             <a href="http://mis.donga.ac.kr/sites/mis/index.do">경영정보학과</a>
+        </div>
+        <br><br><br>
+        <div>
+            <h3>사진 찍으러 가고 싶은 곳</h3>
+            <hr>
+            <ol id="ol1">
+                <li>제주도 한라산</li>
+                <li>서울 광화문</li>
+                <li>전주 한옥마을</li>
+                <li>DMZ 비무장지대</li>
+            </ol>
+            <input id ="text" type="text" maxlength="40" ><br>
+        <button onclick="liStyle();"> 스타일</button>  
+        <button onclick="funAppend();"> 추가</button>
         </div>
         <br><br><br>
         <div>
